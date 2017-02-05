@@ -65,12 +65,15 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li><a href="dashboard.jsp">概况</a></li>
-			<li class="active"><a href="#">添加餐馆 <span class="sr-only">(current)</span></a></li>
+			<li><a href="newres.jsp">添加餐馆</a></li>
             <li><a href="#">添加优惠码</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">编辑餐馆 <a href="/Sell/root/deleteres.jsp?resid=<%=resid%>"><button type="button" class="btn btn-lg btn-danger">删除餐馆</button></a></h1>
+          <h1 class="page-header">编辑餐馆 
+          <a href="/Sell/root/newpromo.jsp?resid=<%=resid%>"><button type="button" class="btn btn-lg btn-primary">添加优惠码</button></a>
+          <a href="/Sell/root/deleteres.jsp?resid=<%=resid%>"><button type="button" class="btn btn-lg btn-success">显示订单</button></a>
+          <a href="/Sell/root/deleteres.jsp?resid=<%=resid%>"><button type="button" class="btn btn-lg btn-danger">删除餐馆</button></a></h1>
          
 
           <h2 class="sub-header">美食列表</h2>
