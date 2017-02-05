@@ -19,13 +19,13 @@ public class ResDao {
 		try
 		{
 			conn = DBConnection.getConn();
-			String sql = "SELECT id, resname, legalname, phone from res;";
+			String sql = "SELECT resid, resname, legalname, phone from res;";
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
 			while(rs.next())
 			{
 				res = new Res();
-				res.setId(rs.getString(1));
+				res.setResId(rs.getString(1));
 				res.setResName(rs.getString(2));
 				res.setLegalName(rs.getString(3));
 				res.setPhone(rs.getString(4));

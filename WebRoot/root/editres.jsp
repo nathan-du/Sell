@@ -33,7 +33,11 @@
   </head>
 
   <body>
-
+	<%
+    	FoodDao food = new FoodDao();
+        String resid = request.getParameter("resid");
+        ArrayList<Food> foodList = food.selectAllFood(resid);
+     %>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -66,8 +70,7 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">编辑餐馆</h1>
-
+          <h1 class="page-header">编辑餐馆 <a href="/Sell/root/deleteres.jsp?id=<%=resid%>"><button type="button" class="btn btn-lg btn-danger">删除餐馆</button></a></h1>
          
 
           <h2 class="sub-header">美食列表</h2>
@@ -84,9 +87,6 @@
               </thead>
               <tbody>
                 <% 
-                	FoodDao food = new FoodDao();
-                	String id = request.getParameter("id");
-                	ArrayList<Food> foodList = food.selectAllFood(id);
                 	for(int i = 0; i < foodList.size(); i++) {
                 %>
                 <tr>
@@ -94,7 +94,7 @@
                   <td><%=foodList.get(i).getName()%></td>
                   <td><%=foodList.get(i).getPrice()%></td>
                   <td><%=foodList.get(i).getDetail()%></td>
-                  <td><a href="/Sell/root/deletefood.jsp?id=<%=foodList.get(i).getId()%>&resid=<%=id%>"><button type="button" class="btn btn-sm btn-danger">删除</button></a></td>
+                  <td><a href="/Sell/root/deletefood.jsp?id=<%=foodList.get(i).getId()%>&resid=<%=resid%>"><button type="button" class="btn btn-sm btn-danger">删除</button></a></td>
                 </tr>
                 <% } %>
               </tbody>

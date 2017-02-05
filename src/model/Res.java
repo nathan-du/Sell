@@ -1,17 +1,17 @@
 package model;
 
 public class Res {
-	private String id;
+	private String resid;
 	private String userName;
 	private String legalName;
 	private String resName;
 	private String phone;
 	private String address;
-	public String getId() {
-		return id;
+	public String getResId() {
+		return resid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setResId(String id) {
+		this.resid = id;
 	}
 	public String getUserName() {
 		return userName;

@@ -89,11 +89,11 @@
                 	for(int i = 0; i < resList.size(); i++) {
                 %>
                 <tr>
-                  <td><%=resList.get(i).getId()%></td>
+                  <td><%=resList.get(i).getResId()%></td>
                   <td><%=resList.get(i).getResName()%></td>
                   <td><%=resList.get(i).getLegalName()%></td>
                   <td><%=resList.get(i).getPhone()%></td>
-                  <td><a href="/Sell/root/editres.jsp?id=<%=resList.get(i).getId()%>"><button type="button" class="btn btn-sm btn-warning">编辑</button></a></td>
+                  <td><a href="/Sell/root/editres.jsp?resid=<%=resList.get(i).getResId()%>"><button type="button" class="btn btn-sm btn-warning">编辑</button></a></td>
                 </tr>
                 <% } %>
               </tbody>
