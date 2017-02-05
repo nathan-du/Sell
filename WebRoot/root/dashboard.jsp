@@ -93,7 +93,7 @@
                   <td><%=resList.get(i).getResName()%></td>
                   <td><%=resList.get(i).getLegalName()%></td>
                   <td><%=resList.get(i).getPhone()%></td>
-                  <td><a href="/editres.jsp?id=<%=resList.get(i).getId()%>"><button type="button" class="btn btn-sm btn-warning">编辑</button></a></td>
+                  <td><a href="/Sell/root/editres.jsp?id=<%=resList.get(i).getId()%>"><button type="button" class="btn btn-sm btn-warning">编辑</button></a></td>
                 </tr>
                 <% } %>
               </tbody>
