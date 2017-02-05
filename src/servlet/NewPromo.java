@@ -49,7 +49,9 @@ public class NewPromo extends HttpServlet {
 			double limit = Double.valueOf(tempLimit);
 			double minus = Double.valueOf(tempMinus);
 			String scope = request.getParameter("scope");
-			if(scope == null) scope = "all";
+			if(scope.equals("null")) {
+				scope = "all";
+			}
 			PromoDao promoDao = new PromoDao();
 			boolean flag = promoDao.insertPromo(promo, scope, tempLimit, tempMinus);
 			if(flag) {
