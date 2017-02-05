@@ -70,7 +70,7 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">编辑餐馆 <a href="/Sell/root/deleteres.jsp?id=<%=resid%>"><button type="button" class="btn btn-lg btn-danger">删除餐馆</button></a></h1>
+          <h1 class="page-header">编辑餐馆 <a href="/Sell/root/deleteres.jsp?resid=<%=resid%>"><button type="button" class="btn btn-lg btn-danger">删除餐馆</button></a></h1>
          
 
           <h2 class="sub-header">美食列表</h2>

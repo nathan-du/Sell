@@ -71,4 +71,56 @@ public class ResDao {
 		}
 		return false;
 	}
+	
+	public boolean delete(String resid) {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		try
+		{
+			
+			conn = DBConnection.getConn();
+			String username = getUsername(resid);
+			String sql = "DELETE from res where resid='"+resid+"';";
+			psmt = conn.prepareStatement(sql);
+			psmt.executeUpdate();
+			sql = "DELETE from user where username='"+username+"';";
+			psmt = conn.prepareStatement(sql);
+			psmt.executeUpdate();
+			DBConnection.close(conn, psmt);
+			return true;
+		}
+		catch (Exception sqlex)
+		{
+			System.err.println("Œﬁ∑®¡¨Ω”µΩ ˝æ›ø‚");
+			sqlex.printStackTrace();
+			System.exit(1);
+		}
+
+		return false;
+
+	}
+	
+	public String getUsername(String resid) {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		String username = null;
+		try
+		{
+			conn = DBConnection.getConn();
+			String sql = "SELECT username from res where resid = '"+resid+"';";
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while(rs.next())
+			{
+				username = rs.getString(1);
+			}
+			DBConnection.close(conn, psmt, rs);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return username;
+	}
 }

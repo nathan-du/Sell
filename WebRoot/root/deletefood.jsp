@@ -1,4 +1,4 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8" import="java.util.*,dao.FoodDao,model.Food,java.io.PrintWriter;
+<%@ page contentType="text/html" pageEncoding="UTF-8" import="java.util.*,dao.FoodDao,java.io.PrintWriter;
 ;"%>
 <html>
  <head> 
