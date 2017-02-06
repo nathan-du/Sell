@@ -80,7 +80,7 @@ ul{list-style:none;}
 
          
 
-          <h2 class="sub-header">美食列表</h2>
+          <h2 class="sub-header">添加美食</h2>
           <form class="navbar-form navbar-left" action="/Sell/NewFood" method="post">
             <ul>
             <li>

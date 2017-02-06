@@ -74,7 +74,7 @@
 
          
 
-          <h2 class="sub-header">餐馆列表</h2>
+          <h2 class="sub-header">订单列表</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
