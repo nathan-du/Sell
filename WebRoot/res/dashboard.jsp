@@ -1,9 +1,5 @@
-<%@ page language="java" pageEncoding="UTF-8" import="java.util.*,dao.ResDao,model.Res"%>
+<%@ page language="java" pageEncoding="UTF-8" import="java.util.*,dao.FoodDao,dao.ResDao,model.Food"%>
 <!DOCTYPE html>
-<style type="text/css">
-ul,li{padding:0; margin:0; }
-ul{list-style:none;}
-</style>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -37,7 +33,13 @@ ul{list-style:none;}
   </head>
 
   <body>
-
+	<%
+    	FoodDao food = new FoodDao();
+        String username = (String)session.getAttribute("username");
+        ResDao res = new ResDao();
+        String resid = res.getResid(username);
+        ArrayList<Food> foodList = food.selectAllFood(resid);
+     %>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -64,54 +66,44 @@ ul{list-style:none;}
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="dashboard.jsp">概况</a></li>
-			<li class="active"><a href="#">添加餐馆 <span class="sr-only">(current)</span></a></li>
-            <li><a href="newpromotion.jsp">添加优惠码</a></li>
+            <li class="active"><a href="dashboard.jsp">概况</a></li>
+            <li><a href="newres.jsp">待处理订单</a></li>
+            <li><a href="newfood.jsp">添加美食</a></li>
+            <li><a href="newpromo.jsp">添加优惠码</a></li>
+            <li><a href="newres.jsp">显示所有订单</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">增加餐馆</h1>
+          <h1 class="page-header">餐馆管理</h1>
 
          
 
-          <h2 class="sub-header">餐馆信息</h2>
+          <h2 class="sub-header">美食列表</h2>
           <div class="table-responsive">
-            <form class="navbar-form navbar-left" action="/Sell/NewRes" method="post">
-            <ul>
-            <li>
-	          <div class="form-group">
-	            <input type="text" name="resname" placeholder="餐馆名字" class="form-control">
-	          </div>
-	          <div class="form-group"></div>
-	          <div class="form-group">
-	            <input type="text" name="legalname" placeholder="法人名字" class="form-control">
-	          </div>
-	        </li>
-	        <li><div class="form-group"></div><a></a></li>
-	        <li>
-            <div class="form-group">
-              <input type="text" name="username" placeholder="用户名" class="form-control">
-            </div>
-            <div class="form-group"></div>
-            <div class="form-group">
-              <input type="password" name="password" placeholder="密码" class="form-control">
-            </div>
-            </li>
-        	<li><div class="form-group"></div><a></a></li>
-        	<li>
-            <div class="form-group">
-              <input type="text" name="phone" placeholder="联系电话" class="form-control">
-            </div>
-            <div class="form-group"></div>
-            <div class="form-group">
-              <input type="text" name="address" placeholder="地址" class="form-control">
-            </div>
-            </li>
-            <li><div class="form-group"></div><a></a></li>
-            </ul>
-            <button type="submit" class="btn btn-success">添加</button> 
-          	</form>
-              
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>美食</th>
+                  <th>价格</th>
+                  <th>描述</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% 
+                	for(int i = 0; i < foodList.size(); i++) {
+                %>
+                <tr>
+                  <td><%=foodList.get(i).getId()%></td>
+                  <td><%=foodList.get(i).getName()%></td>
+                  <td><%=foodList.get(i).getPrice()%></td>
+                  <td><%=foodList.get(i).getDetail()%></td>
+                  <td><a href="/Sell/res/deletefood.jsp?id=<%=foodList.get(i).getId()%>&resid=<%=resid%>"><button type="button" class="btn btn-sm btn-danger">删除</button></a></td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

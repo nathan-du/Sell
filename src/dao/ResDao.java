@@ -123,4 +123,28 @@ public class ResDao {
 		}
 		return username;
 	}
+	
+	public String getResid(String username) {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		String resid = null;
+		try
+		{
+			conn = DBConnection.getConn();
+			String sql = "SELECT resid from res where username = '"+username+"';";
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while(rs.next())
+			{
+				resid = rs.getString(1);
+			}
+			DBConnection.close(conn, psmt, rs);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return resid;
+	}
 }

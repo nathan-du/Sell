@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dbconnection.DBConnection;
@@ -61,5 +62,28 @@ public class FoodDao {
 
 		return false;
 
+	}
+	
+	public boolean insertFood(String name, String resid, String price, String detail)
+	{
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		try
+		{
+			conn = DBConnection.getConn();
+			String sql = "INSERT into food(name, resid, price, detail) values ('"+name+"', '"+resid+"', '"+price+"', '"+detail+"');";
+			psmt = conn.prepareStatement(sql);
+			psmt.executeUpdate();
+			DBConnection.close(conn, psmt);
+			return true;
+		}
+		catch (SQLException sqlex)
+		{
+			System.err.println("崩的嘞");
+			sqlex.printStackTrace();
+			System.exit(1);
+		}
+		return false;
 	}
 }

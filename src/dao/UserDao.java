@@ -23,7 +23,7 @@ public class UserDao {
 				
 				while(rs.next()){
 					
-					String s = rs.getString(3);
+					String s = rs.getString(2);
 					
 					if(s.equals(password))
 					{

@@ -57,8 +57,10 @@ public class Login extends HttpServlet {
 		else 
 		{  
 			session.setAttribute("username", username); 
-			session.setAttribute("authority", "root");
-			response.sendRedirect("/Sell/root/dashboard.jsp");
+			session.setAttribute("authority", flag);
+			if(flag.equals("root")) response.sendRedirect("/Sell/root/dashboard.jsp");
+			else if(flag.equals("res")) response.sendRedirect("/Sell/res/dashboard.jsp");
+			else if(flag.equals("user")) response.sendRedirect("/Sell/login.jsp");
 		}
 	}
 
