@@ -70,7 +70,7 @@ ul{list-style:none;}
             <li><a href="newres.jsp">待处理订单</a></li>
             <li><a href="newfood.jsp">添加美食</a></li>
             <li class="active"><a href="newpromo.jsp?resid=<%=resid%>">添加优惠码</a></li>
-            <li><a href="showorder.jsp">显示所有订单</a></li>
+            <li><a href="showorder.jsp?resid=<%=resid%>">显示所有订单</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

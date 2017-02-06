@@ -1,9 +1,5 @@
-<%@ page language="java" pageEncoding="UTF-8" import="java.util.*,dao.FoodDao,dao.ResDao,model.Food"%>
+<%@ page language="java" pageEncoding="UTF-8" import="java.util.*,dao.OrderDao,model.Order"%>
 <!DOCTYPE html>
-<style type="text/css">
-ul,li{padding:0; margin:0; }
-ul{list-style:none;}
-</style>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -38,10 +34,8 @@ ul{list-style:none;}
 
   <body>
 	<%
-        String username = (String)session.getAttribute("username");
-        ResDao res = new ResDao();
-        String resid = res.getResid(username);
-     %>
+		String resid = request.getParameter("resid");
+	 %>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -70,9 +64,9 @@ ul{list-style:none;}
           <ul class="nav nav-sidebar">
             <li><a href="dashboard.jsp">概况</a></li>
             <li><a href="newres.jsp">待处理订单</a></li>
-            <li class="active"><a href="newfood.jsp">添加美食</a></li>
+            <li><a href="newfood.jsp">添加美食</a></li>
             <li><a href="newpromo.jsp?resid=<%=resid%>">添加优惠码</a></li>
-            <li><a href="showorder.jsp?resid=<%=resid%>">显示所有订单</a></li>
+            <li class="active"><a href="showorder.jsp?resid=<%=resid%>">显示所有订单</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -80,29 +74,39 @@ ul{list-style:none;}
 
          
 
-          <h2 class="sub-header">美食列表</h2>
-          <form class="navbar-form navbar-left" action="/Sell/NewFood" method="post">
-            <ul>
-            <li>
-	          <div class="form-group">
-	            <input type="text" name="name" placeholder="美食名称" class="form-control">
-	          </div>
-	          <div class="form-group"></div>
-	          <div class="form-group">
-	            <input type="text" name="price" placeholder="价格" class="form-control">
-	          </div>
-	        </li>
-        	<li><div class="form-group"></div><a></a></li>
-        	<li>
-            <div class="form-group">
-              <input type="text" name="detail" placeholder="描述" class="form-control">
-            </div>
-            <div id="div4" style="visibility:hidden;"><input type="text" name="resid" value="<%=resid %>" class="form-control"></div> 
-            </li>
-            <li><div class="form-group"></div><a></a></li>
-            </ul>
-            <button type="submit" class="btn btn-success">添加</button> 
-          	</form>
+          <h2 class="sub-header">餐馆列表</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>姓名</th>
+                  <th>地址</th>
+                  <th>联系电话</th>
+                  <th>食物名字</th>
+                  <th>总价</th>
+                  <th>备注</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% 
+                	OrderDao order = new OrderDao();
+                	ArrayList<Order> orderList = order.selectOrder(resid);
+                	for(int i = 0; i < orderList.size(); i++) {
+                %>
+                <tr>
+                  <td><%=orderList.get(i).getOrderid()%></td>
+                  <td><%=orderList.get(i).getName()%></td>
+                  <td><%=orderList.get(i).getAddress()%></td>
+                  <td><%=orderList.get(i).getPhone()%></td>
+                  <td><%=orderList.get(i).getFood()%></td>
+                  <td><%=orderList.get(i).getPrice()%></td>
+                  <td><%=orderList.get(i).getDetail()%></td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
