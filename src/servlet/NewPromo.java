@@ -55,12 +55,12 @@ public class NewPromo extends HttpServlet {
 			PromoDao promoDao = new PromoDao();
 			boolean flag = promoDao.insertPromo(promo, scope, tempLimit, tempMinus);
 			if(flag) {
-				outinlogin.print("<script>alert('添加成功！'); window.location='/Sell/root/dashboard.jsp' </script>");
+				outinlogin.print("<script>alert('添加成功！'); window.location='/Sell/"+request.getSession().getAttribute("authority")+"/dashboard.jsp' </script>");
 				outinlogin.flush();
 				outinlogin.close(); 
 			}
 			else {
-				outinlogin.print("<script>alert('添加失败，请联系管理员！'); window.location='/Sell/root/dashboard.jsp' </script>");
+				outinlogin.print("<script>alert('添加失败，请联系管理员！'); window.location='/Sell"+request.getSession().getAttribute("authority")+"/dashboard.jsp' </script>");
 				outinlogin.flush();
 				outinlogin.close(); 
 			}

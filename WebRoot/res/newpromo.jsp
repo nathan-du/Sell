@@ -1,5 +1,9 @@
-<%@ page language="java" pageEncoding="UTF-8" import="java.util.*,dao.FoodDao,dao.ResDao,model.Food"%>
+<%@ page language="java" pageEncoding="UTF-8" import="java.util.*,dao.ResDao,model.Res"%>
 <!DOCTYPE html>
+<style type="text/css">
+ul,li{padding:0; margin:0; }
+ul{list-style:none;}
+</style>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -10,7 +14,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>餐馆</title>
+    <title>管理员</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/Sell/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -34,11 +38,7 @@
 
   <body>
 	<%
-    	FoodDao food = new FoodDao();
-        String username = (String)session.getAttribute("username");
-        ResDao res = new ResDao();
-        String resid = res.getResid(username);
-        ArrayList<Food> foodList = food.selectAllFood(resid);
+        String resid = request.getParameter("resid");
      %>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -66,44 +66,43 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="dashboard.jsp">概况</a></li>
+            <li><a href="dashboard.jsp">概况</a></li>
             <li><a href="newres.jsp">待处理订单</a></li>
             <li><a href="newfood.jsp">添加美食</a></li>
-            <li><a href="newpromo.jsp?resid=<%=resid%>">添加优惠码</a></li>
+            <li class="active"><a href="newpromo.jsp?resid=<%=resid%>">添加优惠码</a></li>
             <li><a href="showorder.jsp">显示所有订单</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">餐馆管理</h1>
+          <h1 class="page-header">添加优惠码</h1>
 
          
 
-          <h2 class="sub-header">美食列表</h2>
+          <h2 class="sub-header">优惠码信息</h2>
           <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>美食</th>
-                  <th>价格</th>
-                  <th>描述</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% 
-                	for(int i = 0; i < foodList.size(); i++) {
-                %>
-                <tr>
-                  <td><%=foodList.get(i).getId()%></td>
-                  <td><%=foodList.get(i).getName()%></td>
-                  <td><%=foodList.get(i).getPrice()%></td>
-                  <td><%=foodList.get(i).getDetail()%></td>
-                  <td><a href="/Sell/res/deletefood.jsp?id=<%=foodList.get(i).getId()%>&resid=<%=resid%>"><button type="button" class="btn btn-sm btn-danger">删除</button></a></td>
-                </tr>
-                <% } %>
-              </tbody>
-            </table>
+            <form class="navbar-form navbar-left" action="/Sell/NewPromo" method="post">
+            <ul>
+            <li>
+	          <div class="form-group">
+	            <input type="text" name="promo" placeholder="优惠码" class="form-control">
+	          </div>
+	        </li>
+	        <li><div class="form-group"></div><a></a></li>
+	        <li>
+            <div class="form-group">
+              <input type="text" name="limit" placeholder="最低使用金额（满）" class="form-control">
+            </div>
+            <div class="form-group"></div>
+            <div class="form-group">
+              <input type="text" name="minus" placeholder="优惠额度（减）" class="form-control">
+            </div>
+            <div id="div4" style="visibility:hidden;"><input type="text" name="scope" value="<%=resid %>" class="form-control"></div> 
+            </li>
+            <li><div class="form-group"></div><a></a></li>
+            </ul>
+            <button type="submit" class="btn btn-success">添加</button> 
+          	</form>
+              
           </div>
         </div>
       </div>
