@@ -147,4 +147,35 @@ public class ResDao {
 		}
 		return resid;
 	}
+	
+	public ArrayList<Res> selectAllResForUser() {
+		ArrayList<Res> resList = new ArrayList<>();
+		Res res = null;
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		try
+		{
+			conn = DBConnection.getConn();
+			String sql = "SELECT resid, resname, phone, address, scope from res;";
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while(rs.next())
+			{
+				res = new Res();
+				res.setResId(rs.getString(1));
+				res.setResName(rs.getString(2));
+				res.setPhone(rs.getString(3));
+				res.setAddress(rs.getString(4));
+				res.setScope(rs.getString(5));
+				resList.add(res);
+			}
+			DBConnection.close(conn, psmt, rs);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return resList;
+	}
 }

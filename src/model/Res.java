@@ -7,6 +7,7 @@ public class Res {
 	private String resName;
 	private String phone;
 	private String address;
+	private String scope;
 	public String getResId() {
 		return resid;
 	}
@@ -42,6 +43,12 @@ public class Res {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getScope() {
+		return scope;
+	}
+	public void setScope(String scope) {
+		this.scope = scope;
 	}
 	
 }

@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>管理员</title>
+    <title>用户</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/Sell/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -76,23 +76,25 @@
                 <tr>
                   <th>#</th>
                   <th>餐馆名字</th>
-                  <th>法人名字</th>
                   <th>联系电话</th>
-                  <th>操作</th>
+                  <th>地址</th>
+                  <th>主营范围</th>
+                  <th>浏览店铺</th>
                 </tr>
               </thead>
               <tbody>
                 <% 
                 	ResDao res = new ResDao();
-                	ArrayList<Res> resList = res.selectAllRes();
+                	ArrayList<Res> resList = res.selectAllResForUser();
                 	for(int i = 0; i < resList.size(); i++) {
                 %>
                 <tr>
                   <td><%=resList.get(i).getResId()%></td>
                   <td><%=resList.get(i).getResName()%></td>
-                  <td><%=resList.get(i).getLegalName()%></td>
                   <td><%=resList.get(i).getPhone()%></td>
-                  <td><a href="/Sell/root/editres.jsp?resid=<%=resList.get(i).getResId()%>"><button type="button" class="btn btn-sm btn-warning">编辑</button></a></td>
+                  <td><%=resList.get(i).getAddress()%></td>
+                  <td><%=resList.get(i).getScope()%></td>
+                  <td><a href="/Sell/user/showfood.jsp?resid=<%=resList.get(i).getResId()%>"><button type="button" class="btn btn-sm btn-warning">浏览</button></a></td>
                 </tr>
                 <% } %>
               </tbody>
