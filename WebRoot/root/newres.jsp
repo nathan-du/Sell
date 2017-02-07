@@ -108,6 +108,12 @@ ul{list-style:none;}
             </div>
             </li>
             <li><div class="form-group"></div><a></a></li>
+            <li>
+            <div class="form-group">
+              <input type="text" name="scope" placeholder="主营范围" class="form-control">
+            </div>
+            </li>
+            <li><div class="form-group"></div><a></a></li>
             </ul>
             <button type="submit" class="btn btn-success">添加</button> 
           	</form>

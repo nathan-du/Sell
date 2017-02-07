@@ -40,7 +40,7 @@ public class ResDao {
 		return resList;
 	}
 	
-	public boolean insertRes(String username, String legalname, String resname, String phone, String address) {
+	public boolean insertRes(String username, String legalname, String resname, String phone, String address, String scope) {
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -48,7 +48,7 @@ public class ResDao {
 		{
 			conn = DBConnection.getConn();
 			String sqlcheck = "select count(*)  from user where username = '"+username+"';";
-			String sql = "INSERT into res(username, legalname, resname, phone, address) values ('"+username+"', '"+legalname+"', '"+resname+"', '"+phone+"', '"+address+"');";
+			String sql = "INSERT into res(username, legalname, resname, phone, address, scope) values ('"+username+"', '"+legalname+"', '"+resname+"', '"+phone+"', '"+address+"', '"+scope+"');";
 			psmt = conn.prepareStatement(sqlcheck);
 			rs = psmt.executeQuery();
 			while(rs.next()){

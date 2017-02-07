@@ -47,10 +47,11 @@ public class NewRes extends HttpServlet {
 		String legalname = request.getParameter("legalname");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
+		String scope = request.getParameter("scope");
 		String authority = "res";
 		UserDao user = new UserDao();
 		ResDao res = new ResDao();
-		boolean flag2 = res.insertRes(username, legalname, resname, phone, address);
+		boolean flag2 = res.insertRes(username, legalname, resname, phone, address, scope);
 		boolean flag1 = user.insertUser(username, password, authority);
 		if(flag1 && flag2)
 		{
