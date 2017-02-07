@@ -40,4 +40,82 @@ public class PromoDao {
 		}
 		return false;
 	}
+	
+	public String getScope(String promo) {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		String s = null;
+		try
+		{
+			conn = DBConnection.getConn();
+			String sqlcheck = "select scope from promo where name = '"+promo+"';";
+			psmt = conn.prepareStatement(sqlcheck);
+			rs = psmt.executeQuery();
+			while(rs.next()){
+				s = rs.getString(1);	
+			}
+			DBConnection.close(conn, psmt);
+			return s;
+		}
+		catch (SQLException sqlex)
+		{
+			System.err.println("崩的嘞");
+			sqlex.printStackTrace();
+			System.exit(1);
+		}
+		return s;
+	}
+	
+	public double getLmt(String promo) {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		double s = Integer.MAX_VALUE;
+		try
+		{
+			conn = DBConnection.getConn();
+			String sqlcheck = "select lmt from promo where name = '"+promo+"';";
+			psmt = conn.prepareStatement(sqlcheck);
+			rs = psmt.executeQuery();
+			while(rs.next()){
+				s = rs.getDouble(1);	
+			}
+			DBConnection.close(conn, psmt);
+			return s;
+		}
+		catch (SQLException sqlex)
+		{
+			System.err.println("崩的嘞");
+			sqlex.printStackTrace();
+			System.exit(1);
+		}
+		return s;
+	}
+	
+	public double getMinus(String promo) {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		double s = Integer.MAX_VALUE;
+		try
+		{
+			conn = DBConnection.getConn();
+			String sqlcheck = "select minus from promo where name = '"+promo+"';";
+			psmt = conn.prepareStatement(sqlcheck);
+			rs = psmt.executeQuery();
+			while(rs.next()){
+				s = rs.getDouble(1);	
+			}
+			DBConnection.close(conn, psmt);
+			return s;
+		}
+		catch (SQLException sqlex)
+		{
+			System.err.println("崩的嘞");
+			sqlex.printStackTrace();
+			System.exit(1);
+		}
+		return s;
+	}
 }

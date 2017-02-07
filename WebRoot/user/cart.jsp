@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="UTF-8" import="java.util.*,dao.FoodDao,model.Food"%>
+<%@ page language="java" pageEncoding="UTF-8" import="java.util.*,dao.CartDao,model.Cart"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>浏览餐馆</title>
+    <title>购物车</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/Sell/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -34,9 +34,9 @@
 
   <body>
 	<%
-    	FoodDao food = new FoodDao();
-        String resid = request.getParameter("resid");
-        ArrayList<Food> foodList = food.selectAllFood(resid);
+    	CartDao cart = new CartDao();
+        String username = (String)session.getAttribute("username");
+        ArrayList<Cart> cartList = cart.seletAll(username);
      %>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -64,38 +64,55 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="dashboard.jsp">餐馆列表 <span class="sr-only">(current)</span></a></li>
+            <li><a href="dashboard.jsp">餐馆列表 </a></li>
             <li><a href="showorder.jsp">我的订单</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">  
 
-          <h2 class="sub-header">美食列表</h2>
+          <h2 class="sub-header">购物车列表</h2>
           <div class="table-responsive">
+          <form class="navbar-form navbar-left" action="/Sell/AddPromo" method="post">
+              <div class="form-group">
+	            <input type="text" name="promo" placeholder="优惠码" class="form-control">
+	            <button  type="submit" class="btn btn-info">使用优惠码</button>
+	          </div>
+            </form>
+          <form class="navbar-form" action="/Sell/Update" method="post">
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>美食</th>
-                  <th>价格</th>
-                  <th>描述</th>
-                  <th>操作</th>
+                  <th>名称</th>
+                  <th>单价</th>
+                  <th>数量</th>
+                  <th>总价</th>
                 </tr>
               </thead>
               <tbody>
                 <% 
-                	for(int i = 0; i < foodList.size(); i++) {
+                	double sum = 0;
+                	for(int i = 0; i < cartList.size(); i++) {
+                	double amount = cartList.get(i).getCount()*cartList.get(i).getPrice();
+                	sum += amount;
                 %>
-                <tr>
-                  <td><%=foodList.get(i).getId()%></td>
-                  <td><%=foodList.get(i).getName()%></td>
-                  <td><%=foodList.get(i).getPrice()%></td>
-                  <td><%=foodList.get(i).getDetail()%></td>
-                  <td><a href="/Sell/user/addToCart.jsp?id=<%=foodList.get(i).getId()%>&name=<%=foodList.get(i).getName()%>&price=<%=foodList.get(i).getPrice()%>&resid=<%=resid%>"><button type="button" class="btn btn-sm btn-success">加入购物车</button></a></td>
+                <tr>              
+                  <div id="div4" style="visibility:hidden;"><input type="text" name="cartId<%=i %>" value="<%=cartList.get(i).getCartid()%>" class="form-control"></div> 
+                  <td><%=cartList.get(i).getName()%></td>
+                  <td><%=cartList.get(i).getPrice()%></td>
+                  <td><input type="text" name="count<%=i%>"  value="<%=cartList.get(i).getCount()%>"></td>
+                  <td><%=amount %></td>
                 </tr>
                 <% } %>
+                <tr>
+                  <td>总额</td>
+                  <td></td>
+                  <td></td>
+                  <td><%=sum %></td>
+                </tr>
               </tbody>
             </table>
+            <button  type="submit" class="btn btn-success">更新购物车</button> 
+            </form>
           </div>
         </div>
       </div>

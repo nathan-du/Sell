@@ -12,7 +12,7 @@
    String name = request.getParameter("name");
    String username = (String)session.getAttribute("username");
    String resid = request.getParameter("resid");
-   boolean flag = cart.insertFood(id, username, name, price);
+   boolean flag = cart.insertFood(id, username, name, price, resid);
    if(flag)
 		{
 			response.setCharacterEncoding("utf-8");
