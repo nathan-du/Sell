@@ -2,6 +2,8 @@ package model;
 
 public class Order {
 	private String orderid;
+	private String username;
+	private int status;
 	private String name;
 	private String address;
 	private String phone;
@@ -9,6 +11,8 @@ public class Order {
 	private String food;
 	private double price;
 	private String detail;
+	private int point;
+	private String rate;
 	public String getOrderid() {
 		return orderid;
 	}
@@ -56,5 +60,29 @@ public class Order {
 	}
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
+	public String getRate() {
+		return rate;
+	}
+	public void setRate(String rate) {
+		this.rate = rate;
 	}
 }

@@ -51,7 +51,7 @@ public class AddPromo extends HttpServlet {
 		double lmt = promoDao.getLmt(promo);
 		double minus = promoDao.getMinus(promo);
 		PrintWriter outinlogin = response.getWriter();
-		if(scope.equals("all")) {
+		if(scope != null && scope.equals("all")) {
 			double sum = cartDao.getSum(username);
 			if(sum >= lmt) {
 				cartDao.insertPromo(username, 1, promo, -minus);
@@ -65,7 +65,7 @@ public class AddPromo extends HttpServlet {
 				outinlogin.close(); 
 			}
 		}
-		else {
+		else if(scope != null){
 			double sum = cartDao.getSum(username, scope);
 			if(sum >= lmt) {
 				cartDao.insertPromo(username, 1, promo, -minus);
@@ -78,6 +78,11 @@ public class AddPromo extends HttpServlet {
 				outinlogin.flush();
 				outinlogin.close(); 
 			}
+		}
+		else {
+			outinlogin.print("<script>alert('Your promotion is unavailable'); window.location='/Sell/user/cart.jsp' </script>");
+			outinlogin.flush();
+			outinlogin.close(); 
 		}
 	}
 

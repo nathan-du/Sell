@@ -60,7 +60,7 @@ public class NewPromo extends HttpServlet {
 				outinlogin.close(); 
 			}
 			else {
-				outinlogin.print("<script>alert('添加失败，请联系管理员！'); window.location='/Sell"+request.getSession().getAttribute("authority")+"/dashboard.jsp' </script>");
+				outinlogin.print("<script>alert('添加失败，请联系管理员！'); window.location='/Sell/"+request.getSession().getAttribute("authority")+"/dashboard.jsp' </script>");
 				outinlogin.flush();
 				outinlogin.close(); 
 			}

@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>编辑餐馆</title>
+    <title>查询美食</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/Sell/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -35,8 +35,8 @@
   <body>
 	<%
     	FoodDao food = new FoodDao();
-        String resid = request.getParameter("resid");
-        ArrayList<Food> foodList = food.selectAllFood(resid);
+        String name = request.getParameter("name");
+        ArrayList<Food> foodList = food.selectByName(name);
      %>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -51,8 +51,12 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="cart.jsp">购物车</a></li>
             <li><a href="/Sell/logout.jsp">登出</a></li>
           </ul>
+          <form class="navbar-form navbar-right" action = "/Sell/SearchFood" method="post">
+            <input type="text" name="name" class="form-control" placeholder="输入商品名称">
+          </form>
         </div>
       </div>
     </nav>
@@ -61,17 +65,11 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="dashboard.jsp">概况</a></li>
-			<li><a href="newres.jsp">添加餐馆</a></li>
-            <li><a href="newpromo.jsp">添加优惠码</a></li>
+            <li><a href="dashboard.jsp">餐馆列表 <span class="sr-only">(current)</span></a></li>
+            <li><a href="showorder.jsp">我的订单</a></li>
           </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">编辑餐馆 
-          <a href="/Sell/root/newpromo.jsp?resid=<%=resid%>"><button type="button" class="btn btn-lg btn-primary">添加优惠码</button></a>
-          <a href="/Sell/root/showorder.jsp?resid=<%=resid%>"><button type="button" class="btn btn-lg btn-success">显示订单</button></a>
-          <a href="/Sell/root/deleteres.jsp?resid=<%=resid%>"><button type="button" class="btn btn-lg btn-danger">删除餐馆</button></a></h1>
-         
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">  
 
           <h2 class="sub-header">美食列表</h2>
           <div class="table-responsive">
@@ -94,7 +92,7 @@
                   <td><%=foodList.get(i).getName()%></td>
                   <td><%=foodList.get(i).getPrice()%></td>
                   <td><%=foodList.get(i).getDetail()%></td>
-                  <td><a href="/Sell/root/deletefood.jsp?id=<%=foodList.get(i).getId()%>&resid=<%=resid%>"><button type="button" class="btn btn-sm btn-danger">删除</button></a></td>
+                  <td><a href="/Sell/user/addToCart.jsp?id=<%=foodList.get(i).getId()%>&name=<%=foodList.get(i).getName()%>&price=<%=foodList.get(i).getPrice()%>&resid=<%=foodList.get(i).getResid()%>"><button type="button" class="btn btn-sm btn-success">加入购物车</button></a></td>
                 </tr>
                 <% } %>
               </tbody>

@@ -14,7 +14,7 @@ ul{list-style:none;}
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>管理员</title>
+    <title>添加优惠码</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/Sell/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -53,10 +53,7 @@ ul{list-style:none;}
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="/Sell/logout.jsp">登出</a></li>
           </ul>
         </div>
       </div>

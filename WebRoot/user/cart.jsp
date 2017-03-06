@@ -51,11 +51,12 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="cart.jsp">购物车</a></li>
+            <li><a href="/Sell/logout.jsp">登出</a></li>
           </ul>
+          <form class="navbar-form navbar-right" action = "/Sell/SearchFood" method="post">
+            <input type="text" name="name" class="form-control" placeholder="输入商品名称">
+          </form>
         </div>
       </div>
     </nav>
@@ -99,7 +100,12 @@
                   <div id="div4" style="visibility:hidden;"><input type="text" name="cartId<%=i %>" value="<%=cartList.get(i).getCartid()%>" class="form-control"></div> 
                   <td><%=cartList.get(i).getName()%></td>
                   <td><%=cartList.get(i).getPrice()%></td>
-                  <td><input type="text" name="count<%=i%>"  value="<%=cartList.get(i).getCount()%>"></td>
+                  <% if(cartList.get(i).getId() != null) { %><td><input type="text" name="count<%=i%>"  value="<%=cartList.get(i).getCount()%>"></td>
+                  <%}
+                  	else {
+                  %>
+                  <td><%=cartList.get(i).getCount()%><div id="div4" style="visibility:hidden;"><input type="text" name="count" value="<%=cartList.get(i).getCount() %>" class="form-control"></div></td>
+                  <%} %>
                   <td><%=amount %></td>
                 </tr>
                 <% } %>
@@ -109,10 +115,18 @@
                   <td></td>
                   <td><%=sum %></td>
                 </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><a href="/Sell/user/checkout.jsp"><button type="button" class="btn btn-sm btn-danger">结账</button></a></td>
+                </tr>
               </tbody>
             </table>
-            <button  type="submit" class="btn btn-success">更新购物车</button> 
+            <button  type="submit" class="btn btn-success">更新购物车</button>
             </form>
+                         
+            
           </div>
         </div>
       </div>

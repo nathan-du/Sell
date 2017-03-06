@@ -86,4 +86,35 @@ public class FoodDao {
 		}
 		return false;
 	}
+	
+	public ArrayList<Food> selectByName(String name) {
+		ArrayList<Food> foodList = new ArrayList<>();
+		Food food = null;
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		try
+		{
+			conn = DBConnection.getConn();
+			String sql = "SELECT id, price, name, detail, resid from food where name like '%" + name + "%';";
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while(rs.next())
+			{
+				food = new Food();
+				food.setId(rs.getString(1));
+				food.setPrice(rs.getDouble(2));
+				food.setName(rs.getString(3));
+				food.setDetail(rs.getString(4));
+				food.setResid(rs.getString(5));
+				foodList.add(food);
+			}
+			DBConnection.close(conn, psmt, rs);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return foodList;
+	} 
 }

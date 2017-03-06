@@ -47,11 +47,12 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="cart.jsp">购物车</a></li>
+            <li><a href="/Sell/logout.jsp">登出</a></li>
           </ul>
+          <form class="navbar-form navbar-right" action = "/Sell/SearchFood" method="post">
+            <input type="text" name="name" class="form-control" placeholder="输入商品名称">
+          </form>
         </div>
       </div>
     </nav>

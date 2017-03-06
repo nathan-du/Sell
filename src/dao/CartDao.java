@@ -174,6 +174,30 @@ public class CartDao {
 		return s;
 	}
 	
+	public boolean judgeunique(String username, String resid) {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		try
+		{
+			conn = DBConnection.getConn();
+			String sqlcheck = "select resid  from cart where username = '"+username+"';";
+			psmt = conn.prepareStatement(sqlcheck);
+			rs = psmt.executeQuery();
+			while(rs.next()){
+				if(rs.getString(1) != null && !resid.equals(rs.getString(1))) return false;
+			}
+			DBConnection.close(conn, psmt);
+		}
+		catch (SQLException sqlex)
+		{
+			System.err.println("Œﬁ∑®¡¨Ω”µΩ ˝æ›ø‚");
+			sqlex.printStackTrace();
+			System.exit(1);
+		}
+		return true;
+	}
+	
 	public double getSum(String username) {
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -228,5 +252,82 @@ public class CartDao {
 			System.exit(1);
 		}
 		return sum;
+	}
+	
+	public String getFood(String username) {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		StringBuilder sb = new StringBuilder();
+		try
+		{
+			conn = DBConnection.getConn();
+			String sqlcheck = "select name from cart where username = '"+username+"' and id is not null;";
+			psmt = conn.prepareStatement(sqlcheck);
+			rs = psmt.executeQuery();
+			int i = 1;
+			while(rs.next()){
+				sb.append(i + ".");
+				sb.append(rs.getString(1));
+				sb.append(" ");
+				i++;
+			}
+			DBConnection.close(conn, psmt);
+		}
+		catch (SQLException sqlex)
+		{
+			System.err.println("Œﬁ∑®¡¨Ω”µΩ ˝æ›ø‚");
+			sqlex.printStackTrace();
+			System.exit(1);
+		}
+		return sb.toString();
+	}
+	
+	public int getResid(String username) {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		int resid = 0;
+		try
+		{
+			conn = DBConnection.getConn();
+			String sqlcheck = "select resid from cart where username = '"+username+"';";
+			psmt = conn.prepareStatement(sqlcheck);
+			rs = psmt.executeQuery();
+			while(rs.next()){
+				return rs.getInt(1);
+			}
+			DBConnection.close(conn, psmt);
+		}
+		catch (SQLException sqlex)
+		{
+			System.err.println("Œﬁ∑®¡¨Ω”µΩ ˝æ›ø‚");
+			sqlex.printStackTrace();
+			System.exit(1);
+		}
+		return resid;
+	}
+	
+	public boolean delete(String username) {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		try
+		{
+			
+			conn = DBConnection.getConn();
+			String sql = "DELETE from cart where username='"+username+"';";
+			psmt = conn.prepareStatement(sql);
+			psmt.executeUpdate();
+			DBConnection.close(conn, psmt);
+			return true;
+		}
+		catch (Exception sqlex)
+		{
+			System.err.println("Œﬁ∑®¡¨Ω”µΩ ˝æ›ø‚");
+			sqlex.printStackTrace();
+			System.exit(1);
+		}
+
+		return false;
 	}
 }

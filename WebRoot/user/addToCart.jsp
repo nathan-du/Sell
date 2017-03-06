@@ -12,8 +12,19 @@
    String name = request.getParameter("name");
    String username = (String)session.getAttribute("username");
    String resid = request.getParameter("resid");
-   boolean flag = cart.insertFood(id, username, name, price, resid);
-   if(flag)
+   boolean flag = false;
+   boolean flag1 = cart.judgeunique(username, resid);
+   if(!flag1)
+   {
+			response.setCharacterEncoding("utf-8");
+			PrintWriter outinlogin = response.getWriter();
+			outinlogin.print("<script>alert('请添加同一餐馆食物！'); window.location='/Sell/user/showfood.jsp?resid="+ resid +"' </script>");
+			outinlogin.flush();
+			outinlogin.close(); 
+	}
+	else {
+		flag = cart.insertFood(id, username, name, price, resid);
+   		if(flag)
 		{
 			response.setCharacterEncoding("utf-8");
 			PrintWriter outinlogin = response.getWriter();
@@ -29,6 +40,8 @@
 			outinlogin.flush();
 			outinlogin.close(); 
 		}
+	}
+   
   %>
  
  </body>

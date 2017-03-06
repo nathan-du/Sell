@@ -1,5 +1,9 @@
-<%@ page language="java" pageEncoding="UTF-8" import="java.util.*,dao.FoodDao,model.Food"%>
+<%@ page language="java" pageEncoding="UTF-8" import="java.util.*,dao.CartDao,model.Cart"%>
 <!DOCTYPE html>
+<style type="text/css">
+ul,li{padding:0; margin:0; }
+ul{list-style:none;}
+</style>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -10,7 +14,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>编辑餐馆</title>
+    <title>评价</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/Sell/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -34,9 +38,7 @@
 
   <body>
 	<%
-    	FoodDao food = new FoodDao();
-        String resid = request.getParameter("resid");
-        ArrayList<Food> foodList = food.selectAllFood(resid);
+        String orderId = request.getParameter("orderId");
      %>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -51,8 +53,12 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="cart.jsp">购物车</a></li>
             <li><a href="/Sell/logout.jsp">登出</a></li>
           </ul>
+          <form class="navbar-form navbar-right" action = "/Sell/Rate" method="post">
+            <input type="text" name="name" class="form-control" placeholder="输入商品名称">
+          </form>
         </div>
       </div>
     </nav>
@@ -61,45 +67,42 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="dashboard.jsp">概况</a></li>
-			<li><a href="newres.jsp">添加餐馆</a></li>
-            <li><a href="newpromo.jsp">添加优惠码</a></li>
+            <li><a href="dashboard.jsp">餐馆列表 </a></li>
+            <li><a href="showorder.jsp">我的订单</a></li>
           </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">编辑餐馆 
-          <a href="/Sell/root/newpromo.jsp?resid=<%=resid%>"><button type="button" class="btn btn-lg btn-primary">添加优惠码</button></a>
-          <a href="/Sell/root/showorder.jsp?resid=<%=resid%>"><button type="button" class="btn btn-lg btn-success">显示订单</button></a>
-          <a href="/Sell/root/deleteres.jsp?resid=<%=resid%>"><button type="button" class="btn btn-lg btn-danger">删除餐馆</button></a></h1>
-         
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">  
 
-          <h2 class="sub-header">美食列表</h2>
+          <h2 class="sub-header">评价</h2>
           <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>美食</th>
-                  <th>价格</th>
-                  <th>描述</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% 
-                	for(int i = 0; i < foodList.size(); i++) {
-                %>
-                <tr>
-                  <td><%=foodList.get(i).getId()%></td>
-                  <td><%=foodList.get(i).getName()%></td>
-                  <td><%=foodList.get(i).getPrice()%></td>
-                  <td><%=foodList.get(i).getDetail()%></td>
-                  <td><a href="/Sell/root/deletefood.jsp?id=<%=foodList.get(i).getId()%>&resid=<%=resid%>"><button type="button" class="btn btn-sm btn-danger">删除</button></a></td>
-                </tr>
-                <% } %>
-              </tbody>
-            </table>
+            <form class="navbar-form navbar-left" action="/Sell/Rate" method="post">
+            <ul>
+            <li>
+              <div class="form-group">
+              <h3>评分</h3>
+	            <select name="point">
+  					<option value="1">1</option>
+  					<option value="2">2</option>
+  					<option value="3">3</option>
+  					<option value="4">4</option>
+  					<option value="4">4</option>
+  					<option value="5">5</option>
+				</select>
+	          </div>
+	          <div class="form-group">
+	            <input type="text" name="rate" placeholder="评价" class="form-control">
+	          </div>
+	          <div id="div4" style="visibility:hidden;"><input type="text" name="orderId" value="<%=orderId %>" class="form-control"></div> 
+	        </li>
+	        <li><div class="form-group"></div><a></a></li>
+            </ul>
+            <button type="submit" class="btn btn-success">提交评价</button> 
+          	</form>
+              
           </div>
+                         
+            
+          
         </div>
       </div>
     </div>

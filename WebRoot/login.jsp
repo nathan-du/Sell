@@ -32,7 +32,7 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body  style="background-image: url(/Sell/true.jpeg);">
 
     <div class="container">
 

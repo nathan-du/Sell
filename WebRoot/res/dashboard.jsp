@@ -53,10 +53,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="/Sell/logout.jsp">登出</a></li>
           </ul>
         </div>
       </div>
@@ -67,10 +64,10 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="dashboard.jsp">概况</a></li>
-            <li><a href="newres.jsp">待处理订单</a></li>
+            <li><a href="processing.jsp">待处理订单</a></li>
             <li><a href="newfood.jsp">添加美食</a></li>
-            <li><a href="newpromo.jsp?resid=<%=resid%>">添加优惠码</a></li>
-            <li><a href="showorder.jsp?resid=<%=resid%>">显示所有订单</a></li>
+            <li><a href="newpromo.jsp">添加优惠码</a></li>
+            <li><a href="showorder.jsp">显示所有订单</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

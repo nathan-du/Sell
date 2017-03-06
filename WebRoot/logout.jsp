@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>编辑餐馆</title>
+    <title>查询美食</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/Sell/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -33,11 +33,7 @@
   </head>
 
   <body>
-	<%
-    	FoodDao food = new FoodDao();
-        String resid = request.getParameter("resid");
-        ArrayList<Food> foodList = food.selectAllFood(resid);
-     %>
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -51,6 +47,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="cart.jsp">购物车</a></li>
             <li><a href="/Sell/logout.jsp">登出</a></li>
           </ul>
         </div>
@@ -61,45 +58,19 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="dashboard.jsp">概况</a></li>
-			<li><a href="newres.jsp">添加餐馆</a></li>
-            <li><a href="newpromo.jsp">添加优惠码</a></li>
+            <li><a href="dashboard.jsp">餐馆列表 <span class="sr-only">(current)</span></a></li>
+            <li><a href="showorder.jsp">我的订单</a></li>
           </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">编辑餐馆 
-          <a href="/Sell/root/newpromo.jsp?resid=<%=resid%>"><button type="button" class="btn btn-lg btn-primary">添加优惠码</button></a>
-          <a href="/Sell/root/showorder.jsp?resid=<%=resid%>"><button type="button" class="btn btn-lg btn-success">显示订单</button></a>
-          <a href="/Sell/root/deleteres.jsp?resid=<%=resid%>"><button type="button" class="btn btn-lg btn-danger">删除餐馆</button></a></h1>
-         
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">  
 
-          <h2 class="sub-header">美食列表</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>美食</th>
-                  <th>价格</th>
-                  <th>描述</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% 
-                	for(int i = 0; i < foodList.size(); i++) {
-                %>
-                <tr>
-                  <td><%=foodList.get(i).getId()%></td>
-                  <td><%=foodList.get(i).getName()%></td>
-                  <td><%=foodList.get(i).getPrice()%></td>
-                  <td><%=foodList.get(i).getDetail()%></td>
-                  <td><a href="/Sell/root/deletefood.jsp?id=<%=foodList.get(i).getId()%>&resid=<%=resid%>"><button type="button" class="btn btn-sm btn-danger">删除</button></a></td>
-                </tr>
-                <% } %>
-              </tbody>
-            </table>
-          </div>
+          <h3>注销：<%= session.getAttribute("username") %></h3>
+  			<%
+   				response.setHeader("refresh", "2; URL = login.jsp");  // 定时跳转
+   				session.invalidate(); // 注销 session 
+  			%>
+  		<h3>您已成功退出外卖订餐系统，两秒钟后跳转到登陆页</h3>
+  		<h3>如果没有自动跳转，请点击<a href="login.jsp">这里</a></h3>
         </div>
       </div>
     </div>
